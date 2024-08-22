@@ -15,15 +15,6 @@ public class CargarPersonaje : MonoBehaviour
 
     private void Start()
     {
-        // Inicializa todos los personajes como inactivos al inicio
-        cuboPersonajeJugador1.SetActive(false);
-        esferaPersonajeJugador1.SetActive(false);
-        cilindroPersonajeJugador1.SetActive(false);
-
-        cuboPersonajeJugador2.SetActive(false);
-        esferaPersonajeJugador2.SetActive(false);
-        cilindroPersonajeJugador2.SetActive(false);
-
         // Obtener las selecciones guardadas para el Jugador 1
         int cuboJugador1 = PlayerPrefs.GetInt("cuboSelectJugador1");
         int esferaJugador1 = PlayerPrefs.GetInt("esferaSelectJugador1");
@@ -32,14 +23,17 @@ public class CargarPersonaje : MonoBehaviour
         // Activar el personaje seleccionado para el Jugador 1
         if (cuboJugador1 == 1)
         {
+            Instantiate(cuboPersonajeJugador1);
             cuboPersonajeJugador1.SetActive(true);
         }
         else if (esferaJugador1 == 1)
         {
+            Instantiate(esferaPersonajeJugador1);
             esferaPersonajeJugador1.SetActive(true);
         }
         else if (cilindroJugador1 == 1)
         {
+            Instantiate(cilindroPersonajeJugador1);
             cilindroPersonajeJugador1.SetActive(true);
         }
 
@@ -51,14 +45,17 @@ public class CargarPersonaje : MonoBehaviour
         // Activar el personaje seleccionado para el Jugador 2
         if (cuboJugador2 == 1)
         {
+            Instantiate(cuboPersonajeJugador2);
             cuboPersonajeJugador2.SetActive(true);
         }
         else if (esferaJugador2 == 1)
         {
+            Instantiate(esferaPersonajeJugador2);
             esferaPersonajeJugador2.SetActive(true);
         }
         else if (cilindroJugador2 == 1)
         {
+            Instantiate(cilindroPersonajeJugador2);
             cilindroPersonajeJugador2.SetActive(true);
         }
     }
