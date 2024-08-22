@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class CargarPersonaje : MonoBehaviour
 {
     // Referencias a los personajes de ambos jugadores
@@ -12,9 +12,19 @@ public class CargarPersonaje : MonoBehaviour
     public GameObject cuboPersonajeJugador2;
     public GameObject esferaPersonajeJugador2;
     public GameObject cilindroPersonajeJugador2;
+    public CinemachineTargetGroup cinemachineTargetGroup;
 
     private void Start()
     {
+        // Inicializa todos los personajes como inactivos al inicio
+        /*cuboPersonajeJugador1.SetActive(false);
+        esferaPersonajeJugador1.SetActive(false);
+        cilindroPersonajeJugador1.SetActive(false);
+
+        cuboPersonajeJugador2.SetActive(false);
+        esferaPersonajeJugador2.SetActive(false);
+        cilindroPersonajeJugador2.SetActive(false);*/
+
         // Obtener las selecciones guardadas para el Jugador 1
         int cuboJugador1 = PlayerPrefs.GetInt("cuboSelectJugador1");
         int esferaJugador1 = PlayerPrefs.GetInt("esferaSelectJugador1");
@@ -25,16 +35,19 @@ public class CargarPersonaje : MonoBehaviour
         {
             Instantiate(cuboPersonajeJugador1);
             cuboPersonajeJugador1.SetActive(true);
+            cinemachineTargetGroup.AddMember(cuboPersonajeJugador1.transform, 1, 1);
         }
         else if (esferaJugador1 == 1)
         {
             Instantiate(esferaPersonajeJugador1);
             esferaPersonajeJugador1.SetActive(true);
+            cinemachineTargetGroup.AddMember(esferaPersonajeJugador1.transform, 1, 1);
         }
         else if (cilindroJugador1 == 1)
         {
             Instantiate(cilindroPersonajeJugador1);
             cilindroPersonajeJugador1.SetActive(true);
+            cinemachineTargetGroup.AddMember(cilindroPersonajeJugador1.transform, 1, 1);
         }
 
         // Obtener las selecciones guardadas para el Jugador 2
@@ -47,16 +60,19 @@ public class CargarPersonaje : MonoBehaviour
         {
             Instantiate(cuboPersonajeJugador2);
             cuboPersonajeJugador2.SetActive(true);
+            cinemachineTargetGroup.AddMember(cuboPersonajeJugador2.transform, 1, 1);
         }
         else if (esferaJugador2 == 1)
         {
             Instantiate(esferaPersonajeJugador2);
             esferaPersonajeJugador2.SetActive(true);
+            cinemachineTargetGroup.AddMember(esferaPersonajeJugador2.transform, 1, 1);
         }
         else if (cilindroJugador2 == 1)
         {
             Instantiate(cilindroPersonajeJugador2);
             cilindroPersonajeJugador2.SetActive(true);
+            cinemachineTargetGroup.AddMember(cilindroPersonajeJugador2.transform, 1, 1);
         }
     }
 }
