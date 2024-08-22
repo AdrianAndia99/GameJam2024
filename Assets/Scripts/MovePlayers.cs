@@ -6,7 +6,7 @@ public class MovePlayers : MonoBehaviour
 {
     private Rigidbody _compRigidbody;
     public float moveSpeed;
-    public float Life = 4;
+    public HealthPlayer healthPlayer;
     public float rotationSpeed;
     private float move;
     private float rotation;
@@ -16,10 +16,11 @@ public class MovePlayers : MonoBehaviour
     }
     void Start()
     {
-        
+        healthPlayer = GetComponent<HealthPlayer>();
     }
     private void FixedUpdate()
     {
+        if (healthPlayer.IsDead) return;
         Move(move);
         Rotation(rotation);
     }
@@ -44,8 +45,5 @@ public class MovePlayers : MonoBehaviour
         rotation = context.ReadValue<float>();
     }
 
-    public void ChangeLife(float Live)
-    {
-        Life = Life + Live;
-    }
+  
 }
