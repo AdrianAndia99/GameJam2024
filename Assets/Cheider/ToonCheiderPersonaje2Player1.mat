@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonCheider
+  m_Name: ToonCheiderPersonaje2Player1
   m_Shader: {fileID: -6465566751694194690, guid: cdb139cd557a3274eb9e8c0064bc639d,
     type: 3}
   m_Parent: {fileID: 0}
@@ -50,7 +50,7 @@ Material:
     - _QueueOffset: 0
     - _Shades: 0.49
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0.2980392, g: 0.34627333, b: 1, a: 1}
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6430586625713660951

@@ -35,7 +35,6 @@ public class CargarPersonaje : MonoBehaviour
 
         GameObject player1GO;
         GameObject player1Prefab = null;
-
         // Activar el personaje seleccionado para el Jugador 1
         if (cuboJugador1 == 1)
         {
@@ -74,7 +73,7 @@ public class CargarPersonaje : MonoBehaviour
         {
             Player2Prefab = cilindroPersonajeJugador2;
         }
-        Player2GO = Instantiate(Player2Prefab, parent: ParentObject);
+        Player2GO = Instantiate(Player2Prefab, parent: ParentObject);    
         Player2GO.SetActive(true);
         Player2GO.transform.position = SpawnPlayer2.position;
     }
