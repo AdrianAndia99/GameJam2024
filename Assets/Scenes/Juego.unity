@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,19 +266,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b978354d6a4fa3a4e89fa18530539904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cuboPersonajeJugador1: {fileID: 764104359192954128, guid: d725a7f20fbdba041a613f6ba55855c4,
+  cuboPersonajeJugador1: {fileID: 5751474657918185476, guid: 5f45450b33d819948b950bee8593fe69,
     type: 3}
-  esferaPersonajeJugador1: {fileID: 6930560412862988194, guid: e98ab3a39f368924eb4bdaefb5c1e5af,
+  esferaPersonajeJugador1: {fileID: 251869557879670825, guid: e7a3c7b677f4f184194e73c77bc37a0c,
     type: 3}
-  cilindroPersonajeJugador1: {fileID: 6804943984209630852, guid: f2b492dcb156c6d4e92d3bf874b76c76,
+  cilindroPersonajeJugador1: {fileID: 5523332566296171074, guid: b03b4f5c5c32cca4f8afdbc8a80c7cfc,
     type: 3}
-  cuboPersonajeJugador2: {fileID: 4816621695296246730, guid: b7e403950e6ae6e40a63f03de0e25f8c,
+  cuboPersonajeJugador2: {fileID: 6795497331757098963, guid: f5156b8dc7d272348bfe2989c9e462af,
     type: 3}
-  esferaPersonajeJugador2: {fileID: 1998489511906736010, guid: 70d9be58051841d4983180389d5f446e,
+  esferaPersonajeJugador2: {fileID: 3715477541326860677, guid: fa2ac2bfd20fc43419bd96f563325e46,
     type: 3}
-  cilindroPersonajeJugador2: {fileID: 8969046583023406, guid: e9bb182b90160dd40beca49dc82a7ac8,
+  cilindroPersonajeJugador2: {fileID: 5062472089990583552, guid: 768535883442bc54a811d41055525836,
     type: 3}
-  cinemachineTargetGroup: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
