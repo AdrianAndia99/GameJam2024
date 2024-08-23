@@ -13,6 +13,10 @@ public class CargarPersonaje : MonoBehaviour
     public GameObject esferaPersonajeJugador2;
     public GameObject cilindroPersonajeJugador2;
 
+    public Transform ParentObject;
+    public Transform SpawnPlayer1;
+    public Transform SpawnPlayer2;
+
     private void Start()
     {
         // Inicializa todos los personajes como inactivos al inicio
@@ -29,43 +33,49 @@ public class CargarPersonaje : MonoBehaviour
         int esferaJugador1 = PlayerPrefs.GetInt("esferaSelectJugador1");
         int cilindroJugador1 = PlayerPrefs.GetInt("cilindroSelectJugador1");
 
+        GameObject player1GO;
+        GameObject player1Prefab = null;
+
         // Activar el personaje seleccionado para el Jugador 1
         if (cuboJugador1 == 1)
         {
-            Instantiate(cuboPersonajeJugador1);
-            cuboPersonajeJugador1.SetActive(true);
+            player1Prefab = cuboPersonajeJugador1;
         }
         else if (esferaJugador1 == 1)
         {
-            Instantiate(esferaPersonajeJugador1);
-            esferaPersonajeJugador1.SetActive(true);
+            player1Prefab = esferaPersonajeJugador1;
         }
         else if (cilindroJugador1 == 1)
         {
-            Instantiate(cilindroPersonajeJugador1);
-            cilindroPersonajeJugador1.SetActive(true);
+            player1Prefab = cilindroPersonajeJugador1;
         }
+
+        player1GO = Instantiate(player1Prefab, parent: ParentObject);
+        player1GO.SetActive(true);
+        player1GO.transform.position = SpawnPlayer1.position; 
 
         // Obtener las selecciones guardadas para el Jugador 2
         int cuboJugador2 = PlayerPrefs.GetInt("cuboSelectJugador2");
         int esferaJugador2 = PlayerPrefs.GetInt("esferaSelectJugador2");
         int cilindroJugador2 = PlayerPrefs.GetInt("cilindroSelectJugador2");
 
+        GameObject Player2GO;
+        GameObject Player2Prefab = null;
         // Activar el personaje seleccionado para el Jugador 2
         if (cuboJugador2 == 1)
         {
-            Instantiate(cuboPersonajeJugador2);
-            cuboPersonajeJugador2.SetActive(true);
+            Player2Prefab = cuboPersonajeJugador2;
         }
         else if (esferaJugador2 == 1)
         {
-            Instantiate(esferaPersonajeJugador2);
-            esferaPersonajeJugador2.SetActive(true);
+            Player2Prefab = esferaPersonajeJugador2;
         }
         else if (cilindroJugador2 == 1)
         {
-            Instantiate(cilindroPersonajeJugador2);
-            cilindroPersonajeJugador2.SetActive(true);
+            Player2Prefab = cilindroPersonajeJugador2;
         }
+        Player2GO = Instantiate(Player2Prefab, parent: ParentObject);
+        Player2GO.SetActive(true);
+        Player2GO.transform.position = SpawnPlayer2.position;
     }
 }
