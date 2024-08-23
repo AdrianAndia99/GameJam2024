@@ -16,25 +16,26 @@ public class EnemiesController : MonoBehaviour
     public State state;
     public float FrameRate = 0;
     public float Rate = 1;
-   // public Enemies enemiesData;
-    //public float Speed;
-    //public float Damage;
-    //public float Life;
+    public Enemies enemiesData;
+    public float Speed;
+   public float Damage;
+    public float Life;
     public float RotationSpeed;
     public float RadioScanear;
     public LayerMask layerenemy;
     public Vector3 RandomPosition;
-    public HealthPlayer Player;
+    public MovePlayers Player;
     //public bool isCooldownActive;
     private NavMeshAgent Agent;
     public float RadioPatrullaje;
     public LayerMask layerwall;
+    private bool canAttack = true;
     private void Awake()
     {
-       // Life = enemiesData.Life;
+        Life = enemiesData.Life;
        // Speed = enemiesData.speed;
-       // Damage = enemiesData.damage;
-        //RotationSpeed = enemiesData.Rotationspeed;
+        Damage = enemiesData.damage;
+        RotationSpeed = enemiesData.Rotationspeed;
         Agent = GetComponent<NavMeshAgent>();
         
         
@@ -137,8 +138,8 @@ public class EnemiesController : MonoBehaviour
         for(int i = 0; i < colliders.Length; i++)
         {
             GameObject agente = colliders[i].gameObject;
-            HealthPlayer p = agente.GetComponent<HealthPlayer>();
-            if(p != null && !p.IsDead && InSigh(p.transform))
+             MovePlayers p = agente.GetComponent<MovePlayers>();
+            if(p != null  && InSigh(p.transform))
             {
                 Player = p;
 
@@ -191,24 +192,38 @@ public class EnemiesController : MonoBehaviour
     */
     void Atacar()
     {
-        if (Player != null)
+        if (Player != null && canAttack) // Solo atacar si se puede atacar
         {
             RotatePlayer();
             Debug.Log("Atacar");
             float Distance = (Player.transform.position - transform.position).magnitude;
-            if (Distance > 1.5f)
+
+            if (Distance <= 1.5f) // Asegurarse de que el jugador esté al alcance
             {
-                state = State.MoverEnemigo;
-                return;
+                if (Player.health > 0) // Si el jugador no está muerto
+                {
+                    Player.TakeDamage(Damage); // Infligir el daño
+                    StartCoroutine(AttackCooldown()); // Iniciar el cooldown
+                }
+            }
+            else
+            {
+                state = State.MoverEnemigo; // Si el jugador está fuera de alcance, cambiar al estado de mover
             }
         }
-        else
+        else if (!canAttack)
         {
-            state = State.Patrullar;
-
+            state = State.Esperar; // Cambiar al estado de esperar durante el cooldown
         }
 
-        
+
+    }
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false; // Desactivar la capacidad de atacar
+        yield return new WaitForSeconds(1f); // Esperar 2 segundos
+        canAttack = true; // Reactivar la capacidad de atacar
+        state = State.MoverEnemigo; // Volver a mover o atacar después del cooldown
     }
     void Patrullar()
     {
@@ -282,5 +297,23 @@ public class EnemiesController : MonoBehaviour
             Gizmos.DrawLine(transform.position,Player.transform.position);
         }
     }
+    public void TakeDamage(float damage)
+    {
+        Life -= damage;
+        if (Life <= 0)
+        {
+            Die();
+        }
+    }
 
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            
+            TakeDamage(2);
+            Destroy(collision.gameObject);
+        }
+    }
 }

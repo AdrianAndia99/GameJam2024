@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public int healtAgent;
-    public int healtAgentMax;
-    public bool active=false;
+    public int healtAgent;        // Salud actual del agente
+    public int healtAgentMax;    // Salud máxima del agente
+    public bool active = false;  // Estado de actividad
+
+    
     public bool IsDead { get => (healtAgent <= 0); }
+
+  
     public virtual void Damage(int damage)
     {
-      
+        if (active) return;  
+
+       
         healtAgent = Mathf.Clamp(healtAgent - damage, 0, healtAgentMax);
-    
+
+        
+        if (IsDead)
+        {
+            Death(); 
+        }
     }
+
+    
     public virtual void LoadComponent()
     {
-
-        healtAgent = healtAgentMax;
+        healtAgent = healtAgentMax; 
     }
+
+    
     public virtual void Death()
     {
-        active = true;
+        active = true;  
+        Destroy(gameObject);  
     }
 }

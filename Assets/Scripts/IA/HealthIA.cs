@@ -4,29 +4,13 @@ using UnityEngine;
 
 public class HealthIA : Health
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        LoadComponent();
-    }
-
-    // Update is called once per frame
-   
-    public override void LoadComponent()
-    {
-        base.LoadComponent();
-    }
-    public override void Damage(int damage)
-    {
-        if (active) return;
-        base.Damage(damage);
-        if (IsDead)
+      
+        if (collision.gameObject.tag == ("Bullet"))
         {
-            Death();
+            Damage(10);  
+            Destroy(collision.gameObject);
         }
-    }
-    public override void Death()
-    {
-        base.Death();
     }
 }

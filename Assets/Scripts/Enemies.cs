@@ -6,7 +6,6 @@ using UnityEngine;
 public class Enemies : ScriptableObject
 {
     public float damage;
-    public float speed;
     public float Rotationspeed;
     public float Life;
 }
