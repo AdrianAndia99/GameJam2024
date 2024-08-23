@@ -13,12 +13,13 @@ public enum State
 }
 public class EnemiesController : MonoBehaviour
 {
+    public SpawnerEnemy spawnerEnemy;
     public State state;
     public float FrameRate = 0;
     public float Rate = 1;
     public Enemies enemiesData;
     public float Speed;
-   public float Damage;
+    public float Damage;
     public float Life;
     public float RotationSpeed;
     public float RadioScanear;
@@ -33,12 +34,12 @@ public class EnemiesController : MonoBehaviour
     private void Awake()
     {
         Life = enemiesData.Life;
-       // Speed = enemiesData.speed;
+        // Speed = enemiesData.speed;
         Damage = enemiesData.damage;
         RotationSpeed = enemiesData.Rotationspeed;
         Agent = GetComponent<NavMeshAgent>();
-        
-        
+
+
     }
     private void Start()
     {
@@ -66,30 +67,30 @@ public class EnemiesController : MonoBehaviour
             case State.Muerto:
                 Die();
                 break;
-                
+
             case State.None:
                 break;
             default:
                 break;
         }
-            
+
     }
 
     public void MoveEnemi()
     {
-        if(Player != null)
+        if (Player != null)
         {
             MoveToPosition(Player.transform.position);
             RandomPosition = Player.transform.position;
             Debug.Log("MoveEnemi");
             float Distance = (Player.transform.position - transform.position).magnitude;
-            if(Distance < 1.5f)
+            if (Distance < 1.5f)
             {
                 state = State.Atacar;
                 return;
             }
 
-            
+
 
 
 
@@ -98,21 +99,21 @@ public class EnemiesController : MonoBehaviour
         else
         {
             state = State.Patrullar;
-           
+
         }
-        
+
     }
     public void RotatePlayer()
     {
-        if(Player != null)
+        if (Player != null)
         {
             RotateToPosition(Player.transform.position);
         }
     }
-  
+
     void UpdateScaner()
     {
-       if(FrameRate > Rate)
+        if (FrameRate > Rate)
         {
             FrameRate = 0;
             Scanear();
@@ -135,16 +136,16 @@ public class EnemiesController : MonoBehaviour
     {
         Player = null;
         Collider[] colliders = Physics.OverlapSphere(transform.position, RadioScanear, layerenemy);
-        for(int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
             GameObject agente = colliders[i].gameObject;
-             MovePlayers p = agente.GetComponent<MovePlayers>();
-            if(p != null  && InSigh(p.transform))
+            MovePlayers p = agente.GetComponent<MovePlayers>();
+            if (p != null && InSigh(p.transform))
             {
                 Player = p;
 
             }
-            
+
         }
     }
     /* void OnTriggerExit(Collider other)
@@ -169,9 +170,19 @@ public class EnemiesController : MonoBehaviour
           }
       }*/
     public void Die()
-     {
-         Destroy(this.gameObject);
-     }
+    {
+        if (WaveManager.Instance != null)
+        {
+            Debug.Log("Enemy destroyed, notifying WaveManager.");
+            WaveManager.Instance.EnemyDestroyed();
+        }
+        else
+        {
+            Debug.LogError("WaveManager.Instance is null. Make sure WaveManager is in the scene.");
+        }
+        Destroy(this.gameObject);
+      
+    }
     /*
      private void OnCollisionEnter(Collision collision)
      {
@@ -228,7 +239,7 @@ public class EnemiesController : MonoBehaviour
     void Patrullar()
     {
 
-        if(Player != null)
+        if (Player != null)
         {
             state = State.MoverEnemigo;
             return;
@@ -263,21 +274,21 @@ public class EnemiesController : MonoBehaviour
     }
     private Vector3 CalcularPosicionRandom()
     {
-        for(int i = 0; i < 30; ++i)
+        for (int i = 0; i < 30; ++i)
         {
-            Vector3 targetPosition =  transform.position + Random.insideUnitSphere * RadioPatrullaje;
+            Vector3 targetPosition = transform.position + Random.insideUnitSphere * RadioPatrullaje;
             targetPosition.y = transform.position.y;
             NavMeshHit hit;
 
             // Busca el punto más cercano en el NavMesh a la posición del objetivo
-            if (NavMesh.SamplePosition(targetPosition, out hit, RadioPatrullaje , NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(targetPosition, out hit, RadioPatrullaje, NavMesh.AllAreas))
             {
 
                 targetPosition = hit.position;
                 targetPosition.y = transform.position.y;
                 return targetPosition;
             }
-            
+
 
 
         }
@@ -292,26 +303,27 @@ public class EnemiesController : MonoBehaviour
         Gizmos.DrawLine(transform.position, RandomPosition);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, RadioScanear);
-        if(Player != null)
+        if (Player != null)
         {
-            Gizmos.DrawLine(transform.position,Player.transform.position);
+            Gizmos.DrawLine(transform.position, Player.transform.position);
         }
     }
     public void TakeDamage(float damage)
     {
         Life -= damage;
+
         if (Life <= 0)
         {
             Die();
         }
     }
+ 
 
-    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            
+
             TakeDamage(2);
             Destroy(collision.gameObject);
         }

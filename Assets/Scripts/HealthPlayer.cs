@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HealthPlayer : Health
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
         LoadComponent();
     }
 
-    // Update is called once per frame
+    
     public override void LoadComponent()
     {
         base.LoadComponent();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 public class ShootController : MonoBehaviour
 {
     public GunsPlayers Gun;
@@ -36,11 +37,9 @@ public class ShootController : MonoBehaviour
             }
             return; 
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnBullet();
-        }
+
         UpdateUI();
+
     }
     void SpawnBullet()
     {
@@ -63,6 +62,7 @@ public class ShootController : MonoBehaviour
         rigidbody.velocity = velocity;
 
         bulletCount--;
+     
     }
     void UpdateUI()
     {
@@ -88,4 +88,15 @@ public class ShootController : MonoBehaviour
         isReloading = true;
         reloadTimer = reloadTime;
     }
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SpawnBullet();
+            
+        }
+        UpdateUI();
+    }
+
 }
+

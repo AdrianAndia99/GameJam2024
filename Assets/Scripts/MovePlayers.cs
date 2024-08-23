@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using TMPro;
 public class MovePlayers : MonoBehaviour
 {
     private Rigidbody _compRigidbody;
@@ -10,8 +12,10 @@ public class MovePlayers : MonoBehaviour
     public float rotationSpeed;
     private float move;
     private float rotation;
+    public TextMeshProUGUI healthText;
     private void Awake()
     {
+        UpdateHealthText();
         _compRigidbody = GetComponent<Rigidbody>();
     }
     void Start()
@@ -47,15 +51,29 @@ public class MovePlayers : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        UpdateHealthText();
         if (health <= 0)
         {
             Die();
         }
     }
 
+    private void UpdateHealthText()
+    {
+        healthText.text = "Vida: " + health.ToString(); 
+    }
     private void Die()
     {
+        SceneManager.LoadScene("Level2");
         Debug.Log("Jugador ha muerto");
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BulletEnemy"))
+        {
 
+            TakeDamage(4);
+            Destroy(collision.gameObject);
+        }
+    }
 }

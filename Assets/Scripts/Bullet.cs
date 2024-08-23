@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject Particle;
+
     public void OnCollisionEnter(Collision collision)
     {
      
@@ -14,7 +16,12 @@ public class Bullet : MonoBehaviour
         {
 
             healthComponent.Damage(10);
-
+            if(Particle != null)
+            {
+                
+               GameObject blood = Instantiate(Particle, transform.position,Quaternion.identity);
+                Destroy(blood, 3);
+            }
 
            
         }

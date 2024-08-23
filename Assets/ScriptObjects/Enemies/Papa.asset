@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Papa
   m_EditorClassIdentifier: 
   damage: 4
-  speed: 3
-  Rotationspeed: 103
+  Rotationspeed: 150
   Life: 3

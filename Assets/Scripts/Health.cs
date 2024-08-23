@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     public int healtAgent;        // Salud actual del agente
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
     
     public virtual void Death()
     {
-        active = true;  
-        Destroy(gameObject);  
+        active = true;
+        SceneManager.LoadScene("Level2");
     }
 }
