@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 63136a7f6115bd444ae872822ff4dfe9
+  - enabled: 1
     path: Assets/Scenes/Personajes.unity
     guid: 96cae7258e499794f819d34f9fb71ebd
   - enabled: 1
     path: Assets/Scenes/Juego.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Victoria1.unity
+    guid: 73cc2e3dfb2b63c45adcc5baf6d749c5
+  - enabled: 1
+    path: Assets/Scenes/Derrota1.unity
+    guid: c935f260555c21c4299e85b286d34f45
   m_configObjects: {}

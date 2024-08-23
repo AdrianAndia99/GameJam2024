@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class CambioEscena : MonoBehaviour
 {
     public GameObject funciones;
-
     public void cambiar()
     {
         // Asegura que las selecciones se guarden antes de cambiar de escena
