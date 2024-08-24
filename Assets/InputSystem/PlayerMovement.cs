@@ -6,7 +6,7 @@ using Cinemachine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private PlayerInput _playerInput;
+    //[SerializeField] private PlayerInput _playerInput;
     [SerializeField] private float moveSpeed = 5f; // Ajusta la velocidad de movimiento aquí
     [SerializeField] private float rotationSpeed = 20f; // Ajusta la velocidad de rotación aquí
     //[SerializeField] private CinemachineVirtualCamera virtualCamera; // Referencia a la cámara virtual de Cinemachine
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckDistance = 0.2f; // Distancia para verificar si estamos en el suelo
     public LayerMask groundLayer; // Capa para verificar el suelo
     public float Stamina = 50;
+    
     private void Awake()
     {
         m_Cam = FollowCamera.transform;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnValidate()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
+        //_playerInput = GetComponent<PlayerInput>();
     }
     IEnumerator RunStamina()
     {
@@ -69,19 +70,21 @@ public class PlayerMovement : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(m_CamForward);
         rot.x = 0;
         rot.z = 0;
-        transform.rotation = Quaternion.Lerp(transform.rotation,rot,Time.deltaTime * rotationSpeed);
-
+        transform.rotation = rot;
+        RaycastHit hit;
         // Verifica si estamos en el suelo
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down , out hit, groundCheckDistance, groundLayer);
 
 
         //Vector3 moveVector = new Vector3( moveInput.x, 0, moveInput.y) * moveSpeed;
         if (m_Move != Vector3.zero)
         {
 
-            if(!jump && isGrounded)
+            float runSpped = run && isGrounded ? moveSpeed * 2 : moveSpeed;
+
+            if (!jump && isGrounded)
             {
-                float runSpped = run ? moveSpeed * 2 : moveSpeed;
+                
                 _rigidbody.velocity = new Vector3(m_Move.x, _rigidbody.velocity.y, m_Move.z) * runSpped;
 
             }

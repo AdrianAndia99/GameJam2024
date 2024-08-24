@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemies
+  - BulletEnemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -14,10 +17,10 @@ TagManager:
   - P1 Cam
   - P2 Cam
   - Floor
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Player
+  - Bullet
+  - Enemy
   - 
   - 
   - 
